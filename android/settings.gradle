@@ -1,0 +1,3 @@
+rootProject.name = 'miniact'
+
+include ':app'
