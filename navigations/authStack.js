@@ -7,6 +7,8 @@ const AuthStack = createStackNavigator({
     Auth : AuthScreen,
     SignIn : SignInScreen,
     SingUp : SignUpScreen,
+},{
+    headerMode: 'none',
 });
 
 export default AuthStack;
