@@ -4,7 +4,6 @@ rootStyles =  StyleSheet.create({
     button: {
     backgroundColor: '#52b69a',
     height:50,
-    width: 120,
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 10,
@@ -20,6 +19,14 @@ rootStyles =  StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold'
+  },
+  textInput: {
+    height: 40, 
+    borderColor: 'gray',
+    borderWidth: 1 ,
+    paddingHorizontal:5,
+    paddingVertical: 5,
+    borderRadius: 4
   }
 });
 
