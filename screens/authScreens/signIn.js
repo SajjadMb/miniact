@@ -38,7 +38,6 @@ class SignInScreen extends React.Component {
       response.json().then(data => {
         if(data['login']['valid']){
           //store token in state and navigate to home.js
-          
           this.props.navigation.navigate('App');
         }
       });
