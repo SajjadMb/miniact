@@ -7,6 +7,9 @@ import {
   TextInput,
 } from 'react-native';
 import FormData from 'form-data';
+import {connect} from 'react-redux';
+import * as actions from '../../redux/authAction';
+import {AsyncStorage} from 'react-native';
 
 import rootStyles from '../../styles/rootStyle';
 class SignInScreen extends React.Component {
@@ -23,30 +26,11 @@ class SignInScreen extends React.Component {
   }
 
   requestSignIn() {
-    var form = new FormData();
-    form.append('username', this.state.username);
-    form.append('password', this.state.password);
-
-    fetch('https://apagh.venice.ir/mobile/services/action/login/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-      body: form
-    }).then((response) => {
-      console.log(response);
-      response.json().then(data => {
-        if(data['login']['valid']){
-          //store token in state and navigate to home.js
-          this.props.navigation.navigate('App');
-        }
-      });
+    this.props.requestSignIn(this.state.username,this.state.password).then(() => {
+      console.log(this.props);
     })
-    .catch((error) => {
-      console.error(error);
-    });
 
-  } 
+  }
 
   onChangeUsername(username) {
     this.setState({
@@ -110,4 +94,13 @@ const styles = StyleSheet.create({
     marginTop: 15
   }
 });
-export default SignInScreen;
+
+const mapStateToProps = state => ({
+  access_token:state.access_token
+})
+
+const mapDispatchToProps = dispatch => ({
+  requestSignIn:(username,password) => dispatch(actions.SignIn({username,password}))
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(SignInScreen)

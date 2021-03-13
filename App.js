@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import Navigator from './navigations/rootNav';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
+import thunkMiddleware from 'redux-thunk';
 import Reducers from './redux/reducers'
 
-let store = createStore(Reducers);
+let store = createStore(Reducers,applyMiddleware(thunkMiddleware));
 type Props = {};
 export default class App extends Component<Props> {
   render() {
