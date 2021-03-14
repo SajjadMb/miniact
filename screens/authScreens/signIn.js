@@ -26,10 +26,7 @@ class SignInScreen extends React.Component {
   }
 
   requestSignIn() {
-    this.props.requestSignIn(this.state.username,this.state.password).then(() => {
-      console.log(this.props);
-    })
-
+    this.props.requestSignIn(this.state.username,this.state.password);
   }
 
   onChangeUsername(username) {
@@ -45,6 +42,7 @@ class SignInScreen extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
        <View style={styles.Container}>
         <View style={styles.cover}>
@@ -65,6 +63,12 @@ class SignInScreen extends React.Component {
             style={{...rootStyles.button, ...styles.button}}
           >
             <Text style={rootStyles.buttonText}>ورود</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={()=> console.log(this.props)}
+            style={{...rootStyles.button, ...styles.button}}
+          >
+            <Text style={rootStyles.buttonText}>نمایش پراپرتیس ها</Text>
           </TouchableOpacity>
         </View>
       </View>

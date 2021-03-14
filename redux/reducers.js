@@ -7,12 +7,11 @@ const INITIAL_STATE = {
 const authReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case "SAVE_ACCESS_TOKEN":
-      state = { 
-        ...state, 
+      console.log("SAVE_ACCESS_TOKEN");
+      console.log(action.access_token);
+      return {  
         access_token: action.access_token 
       };
-      console.log(state);
-      return state;
     default:
       return state;
   }
