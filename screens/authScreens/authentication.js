@@ -8,6 +8,17 @@ import {
 import rootStyles from '../../styles/rootStyle';
 class AuthScreen extends React.Component {
   render() {
+    displayData = async ()=>{  
+    try{  
+      let is_login = await AsyncStorage.getItem('login');  
+      if(is_login){
+        this.props.navigation.navigate('App');
+      } 
+    }  
+    catch(error){  
+      alert(error)  
+    }  
+  }  
     return (
       <View style={styles.Container}>
         <View style={styles.cover}></View>

@@ -22,10 +22,10 @@ class SignInScreen extends React.Component {
 
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
-    this.requestSignIn = this.requestSignIn.bind(this);
+    this.SignIn = this.SignIn.bind(this);
   }
 
-  requestSignIn() {
+  SignIn() {
     this.props.requestSignIn(this.state.username,this.state.password);
   }
 
@@ -42,7 +42,9 @@ class SignInScreen extends React.Component {
   }
 
   render() {
-    console.log(this.props)
+    if(this.props.login){
+      this.props.navigation.navigate('App');
+    }
     return (
        <View style={styles.Container}>
         <View style={styles.cover}>
@@ -59,7 +61,7 @@ class SignInScreen extends React.Component {
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            onPress={this.requestSignIn}
+            onPress={this.SignIn}
             style={{...rootStyles.button, ...styles.button}}
           >
             <Text style={rootStyles.buttonText}>ورود</Text>
@@ -100,7 +102,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  access_token:state.access_token
+  access_token:state.authReducer.access_token,
+  login:state.authReducer.login
 })
 
 const mapDispatchToProps = dispatch => ({

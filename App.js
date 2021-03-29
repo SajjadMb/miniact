@@ -7,7 +7,6 @@ import thunkMiddleware from 'redux-thunk';
 import Reducers from './redux/reducers'
 
 let store = createStore(Reducers,applyMiddleware(thunkMiddleware));
-type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
