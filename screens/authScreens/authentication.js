@@ -6,19 +6,23 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import rootStyles from '../../styles/rootStyle';
+import {AsyncStorage} from 'react-native'; 
 class AuthScreen extends React.Component {
-  render() {
-    displayData = async ()=>{  
+  async componentWillMount() {
     try{  
-      let is_login = await AsyncStorage.getItem('login');  
+      let is_login = await AsyncStorage.getItem('access_token'); 
       if(is_login){
+        console.log("will mount");
         this.props.navigation.navigate('App');
       } 
     }  
     catch(error){  
       alert(error)  
     }  
-  }  
+  }
+
+  render() {
+    console.log("render");
     return (
       <View style={styles.Container}>
         <View style={styles.cover}></View>

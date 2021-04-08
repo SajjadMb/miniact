@@ -27,6 +27,19 @@ rootStyles =  StyleSheet.create({
     paddingHorizontal:5,
     paddingVertical: 5,
     borderRadius: 4
+  },
+  card: {
+    borderColor: 'gray',
+    borderRadius:4,
+    minHeight: 100,
+    marginHorizontal: 3,
+    marginVertical: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
+    padding: 10
   }
 });
 

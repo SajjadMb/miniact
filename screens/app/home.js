@@ -7,32 +7,51 @@ import {
   FlatList
 } from 'react-native';
 import {AsyncStorage} from 'react-native';  
-
-const posts = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    name: 'Matt Johnson',
-    book: 'GraphQL Basics'
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    name: 'Will Smith',
-    book: 'React Basics'
-
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    name: 'Katie Hanson',
-    book: 'React Native for Mobile Apps'
-  }
-];
+import rootStyles from '../../styles/rootStyle';
+import DashboardApi from '../../api/dashboard.js';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: posts
+      data: []
     }
+  }
+
+  static navigationOptions = {
+    title: 'MiniAct',
+    headerTitleStyle: { alignItems: 'center' },
+    headerStyle: {
+      backgroundColor: '#52b69a',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+  };
+
+  async componentDidMount() {
+    //Have a try and catch block for catching errors.
+    try {
+      //Assign the promise unresolved first then get the data using the json method. 
+      const access_token = await AsyncStorage.getItem('access_token');
+
+      const result = await DashboardApi.fetchDashboard(access_token);
+      console.log(result);
+      this.setState({
+        data: result
+      })
+    } catch(err) {
+      console.log("Error fetching data", err);
+    }
+  }
+
+  renderItem({item}) {
+    return(
+      <View style={rootStyles.card}>
+        <Text>{item.text}</Text>
+      </View>
+    )
   }
 
   item = {};
@@ -41,8 +60,8 @@ class Home extends React.Component {
       <View>
         <FlatList
           data={this.state.data}
-          renderItem={({ item }) => <Text>{item.name}</Text>}
-          keyExtractor={item => item.id}
+          renderItem={({ item }) => this.renderItem({item})}
+          keyExtractor={item => item.actionId}
         />
       </View>
     );
